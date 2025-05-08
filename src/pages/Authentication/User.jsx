@@ -69,7 +69,7 @@ const User = () => {
 
     try {
       const response = await fetch(
-        `https://dadn-delta.vercel.app/api/v1/auth/user/${encodeURIComponent(
+        `https://smart-water-server.vercel.app/api/v1/auth/user/${encodeURIComponent(
           username
         )}`,
         {
@@ -112,7 +112,7 @@ const User = () => {
     formData.append("image", file);
 
     try {
-      const res = await fetch("https://dadn-delta.vercel.app/api/v1/upload/image", {
+      const res = await fetch("https://smart-water-server.vercel.app/api/v1/upload/image", {
         method: "POST",
         body: formData,
       });
@@ -121,7 +121,7 @@ const User = () => {
         const newImageUrl = result.imageUrl;
         // Cập nhật ảnh trong DB
         await fetch(
-          `https://dadn-delta.vercel.app/api/v1/auth/user/${
+          `https://smart-water-server.vercel.app/api/v1/auth/user/${
             currentUser.name || currentUser.username
           }`,
           {
