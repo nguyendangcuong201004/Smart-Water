@@ -12,7 +12,7 @@ export const ScheduleProvider = ({ children }) => {
 
   // API instance
   const api = axios.create({
-    baseURL: "http://localhost:3000/api/v1",
+    baseURL: "https://dadn-delta.vercel.app/api/v1",
     timeout: 10000,
     headers: {
       "Content-Type": "application/json",
