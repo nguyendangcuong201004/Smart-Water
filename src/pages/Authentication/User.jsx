@@ -69,7 +69,7 @@ const User = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:3000/api/v1/auth/user/${encodeURIComponent(
+        `https://server-smart-water.vercel.app/api/v1/auth/user/${encodeURIComponent(
           username
         )}`,
         {
@@ -112,7 +112,7 @@ const User = () => {
     formData.append("image", file);
 
     try {
-      const res = await fetch("http://localhost:3000/api/v1/upload/image", {
+      const res = await fetch("https://server-smart-water.vercel.app/api/v1/upload/image", {
         method: "POST",
         body: formData,
       });
@@ -121,7 +121,7 @@ const User = () => {
         const newImageUrl = result.imageUrl;
         // Cập nhật ảnh trong DB
         await fetch(
-          `http://localhost:3000/api/v1/auth/user/${
+          `https://server-smart-water.vercel.app/api/v1/auth/user/${
             currentUser.name || currentUser.username
           }`,
           {

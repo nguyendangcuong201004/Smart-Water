@@ -64,7 +64,7 @@ const handlePumpSpeedChange = (newSpeed) => {
   useEffect(() => {
     const fetchPumpStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/getPump");
+        const response = await axios.get("https://server-smart-water.vercel.app/api/v1/getPump");
   
         const value = parseFloat(response.data.data.value); // ép thành số
   
@@ -81,7 +81,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     };
     const fetchLightStatus = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/v1/getLight");
+        const response = await axios.get("https://server-smart-water.vercel.app/api/v1/getLight");
         const value = parseFloat(response.data.data.value);
   
         if (value > 0) {
@@ -115,7 +115,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     
       const checkLightAndControl = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/v1/light-sensor/latest");
+          const response = await axios.get("https://server-smart-water.vercel.app/api/v1/light-sensor/latest");
           const latestLight = parseFloat(response.data.data.value);
           const min = parseFloat(lightMin);
           const max = parseFloat(lightMax);
@@ -123,10 +123,10 @@ const handlePumpSpeedChange = (newSpeed) => {
           console.log("Ánh sáng đo:", latestLight, "| Ngưỡng:", min, "-", max);
     
           if (latestLight >= min && latestLight <= max) {
-            await axios.post("http://localhost:3000/api/v1/turnOnLight", { value: 1 });
+            await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnLight", { value: 1 });
             console.log("Ánh sáng phù hợp, đã bật đèn!");
           } else {
-            await axios.post("http://localhost:3000/api/v1/turnOnLight", { value: 0 });
+            await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnLight", { value: 0 });
             console.log("Ánh sáng không phù hợp, đã tắt đèn.");
           }
         } catch (error) {
@@ -147,7 +147,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     useEffect(() => {
       const fetchMoistureThreshold = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/v1/moisture-threshold/latest");
+          const response = await axios.get("https://server-smart-water.vercel.app/api/v1/moisture-threshold/latest");
     
           const { min, max } = response.data.data; // chính xác 100%
     
@@ -167,7 +167,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     useEffect(() => {
       const fetchLightThreshold = async () => {
         try {
-          const response = await axios.get("http://localhost:3000/api/v1/light-threshold/latest");
+          const response = await axios.get("https://server-smart-water.vercel.app/api/v1/light-threshold/latest");
     
           const { min, max } = response.data.data;
     
@@ -185,7 +185,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     }, []);
     const saveLightThreshold = async () => {
       try {
-        await axios.post("http://localhost:3000/api/v1/light-threshold", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/light-threshold", {
           min: lightMin,
           max: lightMax,
         });
@@ -198,7 +198,7 @@ const handlePumpSpeedChange = (newSpeed) => {
     };
     const saveMoistureThreshold = async () => {
       try {
-        await axios.post("http://localhost:3000/api/v1/moisture-threshold", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/moisture-threshold", {
           min: moistureMin,
           max: moistureMax,
         });
@@ -213,7 +213,7 @@ const handlePumpSpeedChange = (newSpeed) => {
   const sendPumpSpeedToServer = async (speed) => {
     try {
       const valueToSend = speed / 100; // vì pumpSpeed là phần trăm
-      await axios.post("http://localhost:3000/api/v1/turnOnPump", {
+      await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnPump", {
         value: valueToSend
       });
       console.log("Sent pump speed:", valueToSend);
@@ -225,7 +225,7 @@ const handlePumpSpeedChange = (newSpeed) => {
   const sendLightIntensityToServer = async (intensity) => {
     try {
       const valueToSend = intensity / 100; // ví dụ 70% -> 0.7
-      await axios.post("http://localhost:3000/api/v1/turnOnLight", {
+      await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnLight", {
         value: valueToSend
       });
       console.log("Sent light intensity:", valueToSend);
@@ -242,13 +242,13 @@ const handlePumpSpeedChange = (newSpeed) => {
       if (newPumpState) {
         // Nếu đang bật => gửi API
         const valueToSend = pumpSpeed / 100; // vì pumpSpeed là %, cần chia 100
-        await axios.post("http://localhost:3000/api/v1/turnOnPump", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnPump", {
           value: valueToSend
         });
         console.log("Sent pump speed:", valueToSend);
       } else {
         // Nếu tắt => gửi value = 0
-        await axios.post("http://localhost:3000/api/v1/turnOnPump", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnPump", {
           value: 0
         });
         console.log("Turned pump off");
@@ -265,13 +265,13 @@ const handlePumpSpeedChange = (newSpeed) => {
       if (newLightState) {
         // Nếu bật đèn
         const valueToSend = lightIntensity / 100;
-        await axios.post("http://localhost:3000/api/v1/turnOnLight", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnLight", {
           value: valueToSend
         });
         console.log("Turned light ON:", valueToSend);
       } else {
         // Nếu tắt đèn
-        await axios.post("http://localhost:3000/api/v1/turnOnLight", {
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnLight", {
           value: 0
         });
         console.log("Turned light OFF");
@@ -296,7 +296,7 @@ const handlePumpSpeedChange = (newSpeed) => {
   
   const checkMoistureAndControlPump = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/v1/dht-moisure/latest");
+      const response = await axios.get("https://server-smart-water.vercel.app/api/v1/dht-moisure/latest");
       const latestMoisture = parseFloat(response.data.data.value);
   
       const min = parseFloat(moistureMin);
@@ -305,10 +305,10 @@ const handlePumpSpeedChange = (newSpeed) => {
       console.log("Độ ẩm đo:", latestMoisture, "| Ngưỡng:", min, "-", max);
   
       if (latestMoisture >= min && latestMoisture <= max) {
-        await axios.post("http://localhost:3000/api/v1/turnOnPump", { value: 1 });
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnPump", { value: 1 });
         console.log("Trong ngưỡng → Bật bơm");
       } else {
-        await axios.post("http://localhost:3000/api/v1/turnOnPump", { value: 0 });
+        await axios.post("https://server-smart-water.vercel.app/api/v1/turnOnPump", { value: 0 });
         console.log("Ngoài ngưỡng → Tắt bơm");
       }
     } catch (error) {

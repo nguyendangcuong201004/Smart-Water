@@ -1,10 +1,10 @@
 export const fetchSensorData = async () => {
   try {
     const [tempRes, moistureRes, lightRes, soilRes] = await Promise.all([
-      fetch("http://localhost:3000/api/v1/dht-temp/latest"),
-      fetch("http://localhost:3000/api/v1/dht-moisure/latest"),
-      fetch("http://localhost:3000/api/v1/light-sensor/latest"),
-      fetch("http://localhost:3000/api/v1/soil-moisure/latest"),
+      fetch("https://server-smart-water.vercel.app/api/v1/dht-temp/latest"),
+      fetch("https://server-smart-water.vercel.app/api/v1/dht-moisure/latest"),
+      fetch("https://server-smart-water.vercel.app/api/v1/light-sensor/latest"),
+      fetch("https://server-smart-water.vercel.app/api/v1/soil-moisure/latest"),
     ]);
 
     if (!tempRes.ok || !moistureRes.ok || !lightRes.ok || !soilRes.ok) {
@@ -48,10 +48,10 @@ export const fetchSensorData = async () => {
 export const fetchChartData = async () => {
   try {
     const [tempRes, moistureRes, lightRes, soilRes] = await Promise.all([
-      fetch("http://localhost:3000/api/v1/dht-temp"),
-      fetch("http://localhost:3000/api/v1/dht-moisure"),
-      fetch("http://localhost:3000/api/v1/light-sensor"),
-      fetch("http://localhost:3000/api/v1/soil-moisure"),
+      fetch("https://server-smart-water.vercel.app/api/v1/dht-temp"),
+      fetch("https://server-smart-water.vercel.app/api/v1/dht-moisure"),
+      fetch("https://server-smart-water.vercel.app/api/v1/light-sensor"),
+      fetch("https://server-smart-water.vercel.app/api/v1/soil-moisure"),
     ]);
 
     const tempData = await tempRes.json();
