@@ -12,7 +12,7 @@ export const ScheduleProvider = ({ children }) => {
 
   // API instance
   const api = axios.create({
-    baseURL: "https://smart-water-server.vercel.app/api/v1",
+    baseURL: "http://localhost:3000/api/v1",
     timeout: 10000,
     headers: {
       "Content-Type": "application/json",
